@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+.open-market {
+  background-color: green;
+}
+
+.closed-market {
+  background-color: red;
+}
