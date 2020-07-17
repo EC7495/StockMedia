@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 8080
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '..', 'public')))
 
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
@@ -16,6 +15,8 @@ if (process.env.NODE_ENV === 'production') {
     else next()
   })
 }
+
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
