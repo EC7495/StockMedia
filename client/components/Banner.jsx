@@ -15,8 +15,7 @@ const Banner = () => {
     }, 1000)
 
     if (seconds === 0) setMinutes(new Date().getMinutes())
-    if (minutes === 0) setHours(new Date().getHours())
-
+    if (minutes === 0 && seconds === 0) setHours(new Date().getHours())
     if (!(hours + minutes / 60 >= 9.5 && hours + minutes / 60 <= 16))
       setMarketOpen(false)
 
