@@ -29,10 +29,9 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error')
 })
 
-const io = socket(
-  app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
-  })
-)
+const server = app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`)
+})
 
-io.on('connection', socket => console.log('Someone connected'))
+const io = socket(server)
+require('./socket')(io)

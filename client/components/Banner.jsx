@@ -9,7 +9,9 @@ const Banner = () => {
   const [minutes, setMinutes] = useState(new Date().getMinutes())
   const [seconds, setSeconds] = useState(new Date().getSeconds())
   const [marketOpen, setMarketOpen] = useState(
-    hours + minutes / 60 >= 9.5 && hours + minutes / 60 <= 16
+    hours + minutes / 60 >= 9.5 &&
+      hours + minutes / 60 <= 16 &&
+      new Date().getDay() <= 5
   )
 
   socket.on('connect', () => console.log('We live'))
@@ -17,12 +19,22 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds(new Date().getSeconds())
+      setMinutes(new Date().getMinutes())
+      setHours(new Date().getHours())
     }, 1000)
 
-    if (seconds === 0) setMinutes(new Date().getMinutes())
-    if (minutes === 0 && seconds === 0) setHours(new Date().getHours())
-    if (!(hours + minutes / 60 >= 9.5 && hours + minutes / 60 <= 16))
+    if (
+      !(hours + minutes / 60 >= 9.5 && hours + minutes / 60 <= 16) &&
+      marketOpen
+    )
       setMarketOpen(false)
+    else if (
+      hours + minutes / 60 >= 9.5 &&
+      hours + minutes / 60 <= 16 &&
+      new Date().getDay() <= 5 &&
+      !maketOpen
+    )
+      setMarketOpen(true)
 
     return () => {
       clearInterval(interval)
