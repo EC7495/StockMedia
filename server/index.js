@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const socket = require('socket.io')
 const path = require('path')
 const morgan = require('morgan')
 const PORT = process.env.PORT || 8080
@@ -28,6 +29,10 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error')
 })
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`)
-})
+const io = socket(
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
+  })
+)
+
+io.on('connection', socket => console.log('Someone connected'))

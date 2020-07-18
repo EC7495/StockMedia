@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { AppBar, Typography } from '@material-ui/core'
+import io from 'socket.io-client'
+
+const socket = io()
 
 const Banner = () => {
   const [hours, setHours] = useState(new Date().getHours())
@@ -8,6 +11,8 @@ const Banner = () => {
   const [marketOpen, setMarketOpen] = useState(
     hours + minutes / 60 >= 9.5 && hours + minutes / 60 <= 16
   )
+
+  socket.on('connect', () => console.log('We live'))
 
   useEffect(() => {
     const interval = setInterval(() => {
