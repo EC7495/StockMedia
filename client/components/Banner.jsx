@@ -39,7 +39,7 @@ const Banner = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [seconds])
+  }, [])
 
   return (
     <div>

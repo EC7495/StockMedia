@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
-import Banner from './components/Banner'
+import { Banner, News } from './components'
 
 const App = () => {
-  return <Banner />
+  return (
+    <div>
+      <Banner />
+      <News />
+    </div>
+  )
 }
 
 render(<App />, document.getElementById('app'))
